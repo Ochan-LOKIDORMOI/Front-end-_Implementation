@@ -17,13 +17,13 @@ class AcoountScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Welcome, John Doe!',
+                'Welcome, John!',
                 style: TextStyle(fontSize: 24),
               ),
               const SizedBox(height: 16),
               const ListTile(
                 leading: Icon(Icons.email),
-                title: Text('Email: john.doe@example.com'),
+                title: Text('Email: john@example.com'),
               ),
               const ListTile(
                 leading: Icon(Icons.phone),
@@ -31,7 +31,7 @@ class AcoountScreen extends StatelessWidget {
               ),
               const ListTile(
                 leading: Icon(Icons.location_on),
-                title: Text('Location: San Francisco, CA'),
+                title: Text('Location: Kigali , Rwanda'),
               ),
               const SizedBox(height: 16),
               OutlinedButton(
