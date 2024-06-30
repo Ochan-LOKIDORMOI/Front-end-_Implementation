@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:just_another_flutter/settings.dart';
+import 'package:implementation/settings.dart';
+// import 'package:just_another_flutter/settings.dart';
 
 class ProfileScreen extends StatelessWidget {
   final Color cardColor = Color.fromARGB(255, 79, 150, 145);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:just_another_flutter/settings_screens/account.dart';
-import 'package:just_another_flutter/settings_screens/feedback.dart';
-import 'package:just_another_flutter/settings_screens/notifications.dart';
+import 'package:implementation/settings_screens/account.dart';
+import 'package:implementation/settings_screens/feedback.dart';
+import 'package:implementation/settings_screens/notifications.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

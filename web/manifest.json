@@ -1,6 +1,6 @@
 {
-    "name": "just_another_flutter",
-    "short_name": "just_another_flutter",
+    "name": "implementation",
+    "short_name": "implementation",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
