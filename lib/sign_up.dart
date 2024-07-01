@@ -3,29 +3,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: AccountScreen(),
-    );
-  }
-}
-
 class AccountScreen extends StatefulWidget {
-  const AccountScreen({super.key});
+  final bool isSignUp;
+
+  const AccountScreen({super.key, required this.isSignUp});
 
   @override
   _AccountScreenState createState() => _AccountScreenState();
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  bool isSignUp = true;
+  late bool isSignUp;
+
+  @override
+  void initState() {
+    super.initState();
+    isSignUp = widget.isSignUp;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +75,7 @@ class _AccountScreenState extends State<AccountScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                !isSignUp ? Color.fromARGB(255, 27, 29, 82) : Colors.grey,
+                                !isSignUp ? const Color.fromARGB(255, 27, 29, 82) : Colors.grey,
                           ),
                           child: const Text('Log in'),
                         ),
@@ -172,9 +166,26 @@ class _AccountScreenState extends State<AccountScreen> {
                         IconButton(
                           icon: const FaIcon(FontAwesomeIcons.facebook),
                           onPressed: () {},
-                          iconSize: 30,
-                        ),
+                          iconSize: 30),
                       ],
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[200],
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      child: const Text(
+                        'Back',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ],
                 ),

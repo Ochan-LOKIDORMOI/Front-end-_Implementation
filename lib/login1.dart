@@ -1,4 +1,7 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
+import 'package:implementation/sign_up.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,8 +31,8 @@ class DiscoverRwandaScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white, 
-                foregroundColor: Colors.black, 
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
                 padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -54,9 +57,14 @@ class DiscoverRwandaScreen extends StatelessWidget {
             const SizedBox(height: 20),
             // Login button
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AccountScreen(isSignUp: false)),
+                );
+              },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black, 
+                backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
                 shape: RoundedRectangleBorder(
@@ -71,7 +79,12 @@ class DiscoverRwandaScreen extends StatelessWidget {
             const SizedBox(height: 10),
             // Signup button
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AccountScreen(isSignUp: true)),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey[200],
                 foregroundColor: Colors.black,
@@ -92,7 +105,7 @@ class DiscoverRwandaScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.grey[200],
                 foregroundColor: Colors.black,
-                padding:const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
@@ -104,7 +117,7 @@ class DiscoverRwandaScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             // Terms and privacy policy text
-           const Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
                 'By signing up, you agree to our terms and privacy policy.',
@@ -112,11 +125,10 @@ class DiscoverRwandaScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 12, color: Colors.black),
               ),
             ),
-           const SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
 }
-
