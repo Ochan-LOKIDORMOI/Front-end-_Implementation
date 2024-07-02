@@ -63,7 +63,7 @@ Widget _buildBottomNavigationBar() {
     type: BottomNavigationBarType.fixed,
     backgroundColor: Colors.white,
     selectedItemColor: Colors.black,
-    unselectedItemColor: Color.fromARGB(255, 79, 150, 145),
+    unselectedItemColor: const Color.fromARGB(255, 79, 150, 145),
     currentIndex: 3,
     items: const [
       BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),

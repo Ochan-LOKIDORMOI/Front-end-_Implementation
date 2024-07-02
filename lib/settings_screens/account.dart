@@ -7,12 +7,12 @@ class AcoountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Account'),
-        backgroundColor: Color.fromARGB(255, 79, 150, 145),
+        title: const Text('Account'),
+        backgroundColor: const Color.fromARGB(255, 79, 150, 145),
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,7 +36,7 @@ class AcoountScreen extends StatelessWidget {
               const SizedBox(height: 16),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 79, 150, 145),
+                  backgroundColor: const Color.fromARGB(255, 79, 150, 145),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
@@ -59,9 +59,9 @@ Widget _buildBottomNavigationBar() {
     type: BottomNavigationBarType.fixed,
     backgroundColor: Colors.white,
     selectedItemColor: Colors.black,
-    unselectedItemColor: Color.fromARGB(255, 79, 150, 145),
+    unselectedItemColor: const Color.fromARGB(255, 79, 150, 145),
     currentIndex: 3, // Profile tab is selected
-    items: [
+    items: const [
       BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
       BottomNavigationBarItem(
           icon: Icon(Icons.grid_view), label: 'Experiences'),

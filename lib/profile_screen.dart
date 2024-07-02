@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:implementation/settings.dart';
-// import 'package:just_another_flutter/settings.dart';
 
 class ProfileScreen extends StatelessWidget {
-  final Color cardColor = Color.fromARGB(255, 79, 150, 145);
+  final Color cardColor = const Color.fromARGB(255, 79, 150, 145);
+
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +13,14 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             _buildUserInfoCard(),
-            SizedBox(height: 54),
+            const SizedBox(height: 54),
             Expanded(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
                     _buildBioSection(),
-                    SizedBox(height: 54),
+                    const SizedBox(height: 54),
                     _buildOptionsList(context),
                   ],
                 ),
@@ -34,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
 
   Widget _buildUserInfoCard() {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       color: cardColor,
       child: Row(
         children: [
@@ -43,8 +44,8 @@ class ProfileScreen extends StatelessWidget {
             backgroundColor: Colors.white,
             child: Icon(Icons.person, size: 40, color: Colors.grey[400]),
           ),
-          SizedBox(width: 16),
-          Column(
+          const SizedBox(width: 16),
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Name...',
@@ -64,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
   Widget _buildBioSection() {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(8),
@@ -72,19 +73,19 @@ class ProfileScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('BIO',
+          const Text('BIO',
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87)),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Container(
             width: double.infinity,
             alignment: Alignment.center,
             color: Colors.white,
-            padding: EdgeInsets.all(16),
-            constraints: BoxConstraints(minHeight: 50),
-            child: Text(
+            padding: const EdgeInsets.all(16),
+            constraints: const BoxConstraints(minHeight: 50),
+            child: const Text(
               'User bio......',
               style: TextStyle(
                   color: Colors.black,
@@ -124,14 +125,14 @@ class ProfileScreen extends StatelessWidget {
       child: ListTile(
         title: Text(
           title,
-          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
+          style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
         ),
-        trailing: Icon(Icons.chevron_right, color: Colors.black),
+        trailing: const Icon(Icons.chevron_right, color: Colors.black),
         onTap: () {
           if (title == 'Settings') {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SettingsScreen()),
+              MaterialPageRoute(builder: (context) => const SettingsScreen()),
             );
           }
         },
@@ -146,7 +147,7 @@ class ProfileScreen extends StatelessWidget {
       selectedItemColor: Colors.black,
       unselectedItemColor: cardColor,
       currentIndex: 3, // Profile tab is selected
-      items: [
+      items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
         BottomNavigationBarItem(
             icon: Icon(Icons.grid_view), label: 'Experiences'),
