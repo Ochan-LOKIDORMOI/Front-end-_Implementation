@@ -1,7 +1,7 @@
-// ignore_for_file: use_key_in_widget_constructors
-
+// main.dart
 import 'package:flutter/material.dart';
-import 'package:implementation/sign_up.dart';
+import 'login_screen.dart';
+import 'signup_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -60,7 +60,8 @@ class DiscoverRwandaScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AccountScreen(isSignUp: false)),
+                  MaterialPageRoute(
+                      builder: (context) => const LoginScreen()), // Update to LoginScreen
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -82,7 +83,8 @@ class DiscoverRwandaScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AccountScreen(isSignUp: true)),
+                  MaterialPageRoute(
+                      builder: (context) => const SignupScreen()), // Update to SignupScreen
                 );
               },
               style: ElevatedButton.styleFrom(

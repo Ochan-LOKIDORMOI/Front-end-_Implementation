@@ -1,37 +1,41 @@
+// home_page.dart
 import 'package:flutter/material.dart';
+import 'profile_screen.dart'; 
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Discover Rwanda'),
-        backgroundColor: Color.fromARGB(255, 13, 17, 13),
+        title: const Text('Discover Rwanda'),
+        backgroundColor: const Color.fromARGB(255, 13, 17, 13),
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search for places...',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
                 'Recommended for you',
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
             ),
-            Container(
+            SizedBox(
               height: 200.0,
               child: ListView(
                 scrollDirection: Axis.horizontal,
@@ -42,14 +46,14 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
                 'Categories',
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
             ),
-            Container(
+            SizedBox(
               height: 200.0,
               child: ListView(
                 scrollDirection: Axis.horizontal,
@@ -65,25 +69,34 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.explore),
             label: 'Experiences',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: 'Wishlist',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ProfileScreen()),
+                );
+              },
+              child: const Icon(Icons.person),
+            ),
             label: 'Profile',
           ),
         ],
-        selectedItemColor: Color.fromARGB(255, 13, 17, 13),
+        selectedItemColor: const Color.fromARGB(255, 13, 17, 13),
         unselectedItemColor: Colors.grey,
       ),
     );
@@ -92,7 +105,7 @@ class HomePage extends StatelessWidget {
   Widget _buildPlaceCard(String name, String imagePath) {
     return Container(
       width: 160.0,
-      margin: EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         image: DecorationImage(
@@ -103,10 +116,10 @@ class HomePage extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomLeft,
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Text(
             name,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               backgroundColor: Colors.black45,
               fontSize: 16.0,
