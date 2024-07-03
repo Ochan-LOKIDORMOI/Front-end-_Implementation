@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Discover Rwanda" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="DiscoverRwandaScreen" />
+    <module name="Front-end-_Implementation" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
