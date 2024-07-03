@@ -6,7 +6,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Discover Rwanda'),
-        backgroundColor: Colors.green,
+        backgroundColor: Color.fromARGB(255, 13, 17, 13),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -36,16 +36,16 @@ class HomePage extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  _buildPlaceCard('Place 1', 'assets/place1.jpg'),
-                  _buildPlaceCard('Place 2', 'assets/place2.jpg'),
-                  _buildPlaceCard('Place 3', 'assets/place3.jpg'),
+                  _buildPlaceCard('Place 1', 'assets/Kigali.jpg'),
+                  _buildPlaceCard('Place 2', 'assets/NNP.jpg'),
+                  _buildPlaceCard('Place 3', 'assets/Aka_park.jpg'),
                 ],
               ),
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Nearby places',
+                'Categories',
                 style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
               ),
             ),
@@ -54,9 +54,10 @@ class HomePage extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  _buildPlaceCard('Place 4', 'assets/place4.jpg'),
-                  _buildPlaceCard('Place 5', 'assets/place5.jpg'),
-                  _buildPlaceCard('Place 6', 'assets/place6.jpg'),
+                  _buildPlaceCard('Place 4', 'assets/nature.jpg'),
+                  _buildPlaceCard('Place 5', 'assets/culture.jpg'),
+                  _buildPlaceCard('Place 6', 'assets/adventure.jpg'),
+                  _buildPlaceCard('Place 7', 'assets/historical.jpg')
                 ],
               ),
             ),
@@ -82,7 +83,7 @@ class HomePage extends StatelessWidget {
             label: 'Profile',
           ),
         ],
-        selectedItemColor: Colors.green,
+        selectedItemColor: Color.fromARGB(255, 13, 17, 13),
         unselectedItemColor: Colors.grey,
       ),
     );
