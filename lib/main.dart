@@ -61,7 +61,7 @@ class DiscoverRwandaScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const LoginScreen()), // Update to LoginScreen
+                      builder: (context) => const LoginScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -84,7 +84,7 @@ class DiscoverRwandaScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const SignupScreen()), // Update to SignupScreen
+                      builder: (context) => const SignupScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
