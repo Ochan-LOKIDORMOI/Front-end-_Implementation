@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:implementation/profile_screen.dart';
+// import 'package:implementation/profile_screen.dart';
+import 'package:implementation/home.page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
         scaffoldBackgroundColor: Colors.teal[100],
       ),
-      home: ProfileScreen(),
+      home: HomePage(),
     );
   }
 }

@@ -10,8 +10,8 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
-        backgroundColor: Color.fromARGB(255, 79, 150, 145),
+        title: const Text('Settings'),
+        backgroundColor: const Color.fromARGB(255, 79, 150, 145),
       ),
       body: Column(children: [
         _buildSettingsOption(context, title: 'Account', onTap: () {}),
@@ -35,15 +35,15 @@ class SettingsScreen extends StatelessWidget {
         switch (title) {
           case 'Account':
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AcoountScreen()));
+                MaterialPageRoute(builder: (context) => const AcoountScreen()));
             break;
           case 'feedback':
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => FeedbackScreen()));
+                MaterialPageRoute(builder: (context) => const FeedbackScreen()));
             break;
           case 'Notifications':
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()));
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()));
             break;
         }
       },
@@ -55,9 +55,9 @@ class SettingsScreen extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.white,
       selectedItemColor: Colors.black,
-      unselectedItemColor: Color.fromARGB(255, 79, 150, 145),
+      unselectedItemColor: const Color.fromARGB(255, 79, 150, 145),
       currentIndex: 3, // Profile tab is selected
-      items: [
+      items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
         BottomNavigationBarItem(
             icon: Icon(Icons.grid_view), label: 'Experiences'),
