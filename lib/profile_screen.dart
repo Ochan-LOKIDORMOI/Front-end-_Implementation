@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:implementation/home.page.dart';
 import 'package:implementation/settings.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -29,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 
@@ -99,7 +100,6 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildOptionsList(BuildContext context) {
-    // Accept context here
     return Container(
       decoration: BoxDecoration(
         color: cardColor,
@@ -107,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          _buildOptionItem('Settings', context), // Pass context here
+          _buildOptionItem('Settings', context),
           _buildOptionItem('Saved Attractions', context),
           _buildOptionItem('History', context),
           _buildOptionItem('Past Itineraries', context),
@@ -117,7 +117,6 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildOptionItem(String title, BuildContext context) {
-    // Accept context here
     return Container(
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: Colors.grey[200]!)),
@@ -125,7 +124,8 @@ class ProfileScreen extends StatelessWidget {
       child: ListTile(
         title: Text(
           title,
-          style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+              color: Colors.black87, fontWeight: FontWeight.bold),
         ),
         trailing: const Icon(Icons.chevron_right, color: Colors.black),
         onTap: () {
@@ -140,13 +140,21 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.white,
       selectedItemColor: Colors.black,
       unselectedItemColor: cardColor,
-      currentIndex: 3, // Profile tab is selected
+      currentIndex: 3,
+      onTap: (index) {
+        if (index == 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        }
+      },
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
         BottomNavigationBarItem(
