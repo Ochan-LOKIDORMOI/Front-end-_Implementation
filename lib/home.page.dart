@@ -1,8 +1,10 @@
 // home_page.dart
 import 'package:flutter/material.dart';
+import 'package:implementation/location.dart';
 import 'profile_screen.dart';
 
 class HomePage extends StatelessWidget {
+  final Color cardColor = const Color.fromARGB(255, 79, 150, 145);
   const HomePage({super.key});
 
   @override
@@ -71,37 +73,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
-            label: 'Experiences',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Wishlist',
-          ),
-          BottomNavigationBarItem(
-            icon: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ProfileScreen()),
-                );
-              },
-              child: const Icon(Icons.person),
-            ),
-            label: 'Profile',
-          ),
-        ],
-        selectedItemColor: const Color.fromARGB(255, 13, 17, 13),
-        unselectedItemColor: Colors.grey,
-      ),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 
@@ -130,6 +102,38 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildBottomNavigationBar(BuildContext context) {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.black,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: cardColor,
+      currentIndex: 0,
+      onTap: (index) {
+        if (index == 3) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ProfileScreen()),
+          );
+        } else if (index == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MapScreen()),
+          );
+        }
+      },
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.grid_view), label: 'Experiences'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border), label: 'Wishlist'),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline), label: 'Profile'),
+      ],
     );
   }
 }

@@ -143,8 +143,8 @@ class ProfileScreen extends StatelessWidget {
   Widget _buildBottomNavigationBar(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      selectedItemColor: Colors.black,
+      backgroundColor: Colors.black,
+      selectedItemColor: Colors.white,
       unselectedItemColor: cardColor,
       currentIndex: 3,
       onTap: (index) {
