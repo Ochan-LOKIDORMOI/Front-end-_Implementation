@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:implementation/home.page.dart';
+import 'package:implementation/location.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -60,7 +62,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 
@@ -76,27 +78,35 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     );
   }
 
-  Widget _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar(BuildContext context) {
+    const Color cardColor = Color.fromARGB(255, 79, 150, 145);
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      selectedItemColor: Colors.black,
-      unselectedItemColor: const Color.fromARGB(255, 79, 150, 145),
-      currentIndex: 2, // Notifications tab is selected
+      backgroundColor: Colors.black,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: cardColor,
+      currentIndex: 3,
+      onTap: (index) {
+        if (index == 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        } else if (index == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MapScreen()),
+          );
+        }
+      },
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
         BottomNavigationBarItem(
-          icon: Icon(Icons.grid_view),
-          label: 'Experiences',
-        ),
+            icon: Icon(Icons.grid_view), label: 'Experiences'),
         BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
-          label: 'Notifications',
-        ),
+            icon: Icon(Icons.favorite_border), label: 'Wishlist'),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline),
-          label: 'Profile',
-        ),
+            icon: Icon(Icons.person_outline), label: 'Profile'),
       ],
     );
   }

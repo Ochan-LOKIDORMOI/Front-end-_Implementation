@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:implementation/home.page.dart';
+import 'package:implementation/location.dart';
 import 'package:implementation/settings_screens/account.dart';
 import 'package:implementation/settings_screens/feedback.dart';
 import 'package:implementation/settings_screens/notifications.dart';
 
 class SettingsScreen extends StatelessWidget {
+  final Color cardColor = const Color.fromARGB(255, 79, 150, 145);
   const SettingsScreen({super.key});
 
   @override
@@ -22,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
         _buildSettingsOption(context, title: 'feedback', onTap: () {}),
         _buildSettingsOption(context, title: 'Logout', onTap: () {}),
       ]),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 
@@ -38,25 +41,42 @@ class SettingsScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const AcoountScreen()));
             break;
           case 'feedback':
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const FeedbackScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FeedbackScreen()));
             break;
           case 'Notifications':
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const NotificationsScreen()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsScreen()));
             break;
         }
       },
     );
   }
 
-  Widget _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      selectedItemColor: Colors.black,
-      unselectedItemColor: const Color.fromARGB(255, 79, 150, 145),
-      currentIndex: 3, // Profile tab is selected
+      backgroundColor: Colors.black,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: cardColor,
+      currentIndex: 3,
+      onTap: (index) {
+        if (index == 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        } else if (index == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MapScreen()),
+          );
+        }
+      },
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: 'Home'),
         BottomNavigationBarItem(

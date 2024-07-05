@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:implementation/home.page.dart';
+import 'package:implementation/location.dart';
 import 'package:implementation/settings.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -152,6 +153,11 @@ class ProfileScreen extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+        } else if (index == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const MapScreen()),
           );
         }
       },
