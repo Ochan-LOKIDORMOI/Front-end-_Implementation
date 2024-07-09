@@ -1,6 +1,8 @@
 // home_page.dart
 import 'package:flutter/material.dart';
-import 'package:implementation/location.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'location.dart';
 import 'profile_screen.dart';
 
 class HomePage extends StatelessWidget {
@@ -45,9 +47,16 @@ class HomePage extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  _buildPlaceCard('Place 1', 'assets/Kigali.jpg'),
-                  _buildPlaceCard('Place 2', 'assets/NNP.jpg'),
-                  _buildPlaceCard('Place 3', 'assets/Aka_park.jpg'),
+                  _buildPlaceCard('Kigali City', 'assets/Kigali.jpg',
+                      'https://www.kigalicity.gov.rw/'),
+                  _buildPlaceCard(
+                      'Nyungwe National Park',
+                      'assets/Nyungwe_national_park.jpg',
+                      'https://www.nyungweforestnationalpark.org/'),
+                  _buildPlaceCard(
+                      'Akagera National Park',
+                      'assets/Akagera_national_park.jpg',
+                      'https://www.akageranationalpark.org/'),
                 ],
               ),
             ),
@@ -63,10 +72,14 @@ class HomePage extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  _buildPlaceCard('Place 4', 'assets/nature.jpg'),
-                  _buildPlaceCard('Place 5', 'assets/culture.jpg'),
-                  _buildPlaceCard('Place 6', 'assets/adventure.jpg'),
-                  _buildPlaceCard('Place 7', 'assets/historical.jpg')
+                  _buildPlaceCard('Place 4', 'assets/nature.jpg',
+                      'https://example.com/place4'),
+                  _buildPlaceCard('Place 5', 'assets/culture.jpg',
+                      'https://example.com/place5'),
+                  _buildPlaceCard('Place 6', 'assets/adventure.jpg',
+                      'https://example.com/place6'),
+                  _buildPlaceCard('Place 7', 'assets/historical.jpg',
+                      'https://example.com/place7'),
                 ],
               ),
             ),
@@ -77,32 +90,43 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildPlaceCard(String name, String imagePath) {
-    return Container(
-      width: 160.0,
-      margin: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
+  Widget _buildPlaceCard(String name, String imagePath, String url) {
+    return GestureDetector(
+      onTap: () => _launchURL(url),
+      child: Container(
+        width: 160.0,
+        margin: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          image: DecorationImage(
+            image: AssetImage(imagePath),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      child: Align(
-        alignment: Alignment.bottomLeft,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            name,
-            style: const TextStyle(
-              color: Colors.white,
-              backgroundColor: Colors.black45,
-              fontSize: 16.0,
+        child: Align(
+          alignment: Alignment.bottomLeft,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              name,
+              style: const TextStyle(
+                color: Colors.white,
+                backgroundColor: Colors.black45,
+                fontSize: 16.0,
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Widget _buildBottomNavigationBar(BuildContext context) {

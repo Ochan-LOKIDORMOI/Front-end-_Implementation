@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "598862053835",
+    "firebase_url": "https://discover-rwanda-default-rtdb.firebaseio.com",
+    "project_id": "discover-rwanda",
+    "storage_bucket": "discover-rwanda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598862053835:android:44538eb8ea4c39a06e364e",
+        "android_client_info": {
+          "package_name": "com.example.implementation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDggL_nu7X50bHxuIRONH5Zu5RVLoAPqgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -36,7 +36,7 @@ class _MapScreenState extends State<MapScreen> {
       'name': 'Inema Art Center',
       'latLng': const LatLng(-1.9535, 30.0915),
       'type': 'Art Gallery',
-      'image': 'lib/images/inama art.jpg',
+      'image': 'lib/images/inama_art.jpg',
     },
     {
       'name': 'Caplaki Craft Village',
