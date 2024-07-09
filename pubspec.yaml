@@ -70,15 +70,15 @@ flutter:
     - lib/images/inama art.jpg
     - lib/images/caplaki.jpg
     - lib/images/genocide.jpg
-    - assets/adventure.jpg
     - assets/Akagera_national_park.jpg
-    - assets/culture.jpg
     - assets/exper_Rwa.jpg
     - assets/explo_Kig.jpg
-    - assets/historical.jpg
     - assets/Kigali.jpg
-    - assets/nature.jpg
     - assets/Nyungwe_national_park.jpg
+    - assets/bigogwe.jpg
+    - assets/HotSprings.png
+    - assets/indake.jpg
+    - assets/Ndaba.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
