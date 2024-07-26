@@ -1,9 +1,0 @@
-{
-  "projects": {
-    "default": "discover-rwanda",
-    "staging": "discover-rwanda"
-  },
-  "targets": {},
-  "etags": {},
-  "dataconnectEmulatorConfig": {}
-}

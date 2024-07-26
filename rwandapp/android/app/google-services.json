@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "171539755117",
+    "project_id": "discoverrwanda",
+    "storage_bucket": "discoverrwanda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171539755117:android:832be6e91c5ab0c06fcf64",
+        "android_client_info": {
+          "package_name": "com.example.rwandapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDefsQtYC7Mh0xL9_E87Xy6iiZ78iVFano"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
