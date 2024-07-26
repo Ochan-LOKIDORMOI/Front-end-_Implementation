@@ -1,0 +1,3 @@
+**DEMO VIDEO FOR THE FRONTEND**
+
+https://www.loom.com/share/0846b4f46d544682a53320297cc63ec1
