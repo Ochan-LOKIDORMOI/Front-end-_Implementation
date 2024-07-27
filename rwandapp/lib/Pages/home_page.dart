@@ -1,8 +1,8 @@
-// home_page.dart
 import 'package:flutter/material.dart';
 import 'package:rwandapp/Pages/location.dart';
 import 'package:rwandapp/settings/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:rwandapp/Pages/wishlist_screen.dart'; // Import the Wishlist screen
 
 class HomePage extends StatelessWidget {
   final Color cardColor = const Color.fromARGB(255, 79, 150, 145);
@@ -145,6 +145,11 @@ class HomePage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const MapScreen()),
+          );
+        } else if (index == 2) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => WishlistScreen()), // Navigate to WishlistScreen
           );
         }
       },
