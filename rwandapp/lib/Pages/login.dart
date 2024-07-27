@@ -24,11 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
       // Handle successful login
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Enter the correct email and password')),
+        SnackBar(content: Text('Enter the correct email and password !!!')),
       );
     }
   }
