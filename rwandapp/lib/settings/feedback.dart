@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rwandapp/Pages/home_page.dart';
-import 'package:rwandapp/Pages/location.dart';
+import 'package:rwandapp/Pages/ExperiencesPage.dart';
 
 class FeedbackScreen extends StatelessWidget {
   const FeedbackScreen({super.key});
@@ -77,7 +77,7 @@ Widget _buildBottomNavigationBar(BuildContext context) {
         } else if (index == 1) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const MapScreen()),
+            MaterialPageRoute(builder: (context) => const ExperiencesPage()),
           );
         }
       },

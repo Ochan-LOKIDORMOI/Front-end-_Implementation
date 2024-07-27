@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rwandapp/Pages/home_page.dart';
-import 'package:rwandapp/Pages/location.dart';
+import 'package:rwandapp/Pages/ExperiencesPage.dart';
 
 
 class NotificationsScreen extends StatefulWidget {
@@ -96,7 +96,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         } else if (index == 1) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const MapScreen()),
+            MaterialPageRoute(builder: (context) => const ExperiencesPage()),
           );
         }
       },

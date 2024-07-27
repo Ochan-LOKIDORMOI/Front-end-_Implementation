@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rwandapp/Pages/location.dart';
+import 'package:rwandapp/Pages/ExperiencesPage.dart';
+import 'package:rwandapp/Pages/VisitedPlaces.dart';
+import 'package:rwandapp/Pages/wishlist_screen.dart';
 import 'package:rwandapp/settings/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:rwandapp/Pages/wishlist_screen.dart';
 
-class HomePage extends StatelessWidget {
-  final Color cardColor = const Color.fromARGB(255, 79, 150, 145);
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final Color cardColor = const Color.fromARGB(255, 79, 150, 145);
+  String searchQuery = '';
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +36,11 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        searchQuery = value;
+                      });
+                    },
                     decoration: InputDecoration(
                       hintText: 'Search for places...',
                       prefixIcon: const Icon(Icons.search),
@@ -54,15 +67,19 @@ class HomePage extends StatelessWidget {
                     builder: (context, snapshot) {
                       if (!snapshot.hasData)
                         return const Center(child: CircularProgressIndicator());
-                      return ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: snapshot.data!.docs.map((doc) {
+                      final filteredDocs = snapshot.data!.docs.where((doc) =>
+                          doc['name'].toString().toLowerCase().contains(searchQuery.toLowerCase()));
+                      return GridView.count(
+                        crossAxisCount: 2,
+                        childAspectRatio: (constraints.maxWidth / 2) / (constraints.maxWidth / 2 + 100),
+                        children: filteredDocs.map((doc) {
                           return _buildPlaceCard(
                             doc['name'],
                             doc['imagePath'],
                             doc['url'],
                             doc['description'],
                             constraints.maxWidth,
+                            doc,
                           );
                         }).toList(),
                       );
@@ -83,15 +100,19 @@ class HomePage extends StatelessWidget {
                     builder: (context, snapshot) {
                       if (!snapshot.hasData)
                         return const Center(child: CircularProgressIndicator());
-                      return ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: snapshot.data!.docs.map((doc) {
+                      final filteredDocs = snapshot.data!.docs.where((doc) =>
+                          doc['name'].toString().toLowerCase().contains(searchQuery.toLowerCase()));
+                      return GridView.count(
+                        crossAxisCount: 2,
+                        childAspectRatio: (constraints.maxWidth / 2) / (constraints.maxWidth / 2 + 100),
+                        children: filteredDocs.map((doc) {
                           return _buildPlaceCard(
                             doc['name'],
                             doc['imagePath'],
                             doc['url'],
                             doc['description'],
                             constraints.maxWidth,
+                            doc,
                           );
                         }).toList(),
                       );
@@ -107,45 +128,49 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildPlaceCard(String name, String imagePath, String url, String description, double screenWidth) {
+  Widget _buildPlaceCard(String name, String imagePath, String url, String description, double screenWidth, QueryDocumentSnapshot doc) {
     return GestureDetector(
-      onTap: () => _launchURL(url),
+      onTap: () {
+        VisitedPlaces.addPlace({
+          'name': name,
+          'imagePath': imagePath,
+          'url': url,
+          'description': description,
+        });
+        _launchURL(url);
+      },
       child: Container(
-        width: screenWidth > 600 ? 250.0 : 160.0,
         margin: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.0),
-          image: DecorationImage(
-            image: NetworkImage(imagePath),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              color: Colors.black45,
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                name,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
+              height: screenWidth > 600 ? 180.0 : 120.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.0),
+                image: DecorationImage(
+                  image: NetworkImage(imagePath),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-            Container(
-              color: Colors.black45,
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                description,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 14.0,
-                ),
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
+            const SizedBox(height: 8.0),
+            Text(
+              name,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
               ),
+            ),
+            Text(
+              description,
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 14.0,
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
@@ -177,7 +202,7 @@ class HomePage extends StatelessWidget {
         } else if (index == 1) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const MapScreen()),
+            MaterialPageRoute(builder: (context) => const ExperiencesPage()),
           );
         } else if (index == 2) {
           Navigator.push(
