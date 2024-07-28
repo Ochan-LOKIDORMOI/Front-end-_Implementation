@@ -6,6 +6,7 @@ class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SignupScreenState createState() => _SignupScreenState();
 }
 
@@ -29,13 +30,16 @@ class _SignupScreenState extends State<SignupScreen> {
         password: _passwordController.text,
       );
       // Handle successful registration
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Successfully signed up')),
       );
-      Navigator.pop(context); // Go back to previous screen or navigate to home
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
     } catch (e) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter the correct details')),
+        const SnackBar(content: Text('Please enter the correct details')),
       );
     }
   }

@@ -65,8 +65,9 @@ class _HomePageState extends State<HomePage> {
                         .where('category', isEqualTo: 'Recommended')
                         .snapshots(),
                     builder: (context, snapshot) {
-                      if (!snapshot.hasData)
+                      if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
+                      }
                       final filteredDocs = snapshot.data!.docs.where((doc) =>
                           doc['name'].toString().toLowerCase().contains(searchQuery.toLowerCase()));
                       return GridView.count(
@@ -98,8 +99,9 @@ class _HomePageState extends State<HomePage> {
                   child: StreamBuilder<QuerySnapshot>(
                     stream: FirebaseFirestore.instance.collection('places').snapshots(),
                     builder: (context, snapshot) {
-                      if (!snapshot.hasData)
+                      if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
+                      }
                       final filteredDocs = snapshot.data!.docs.where((doc) =>
                           doc['name'].toString().toLowerCase().contains(searchQuery.toLowerCase()));
                       return GridView.count(
@@ -179,7 +181,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _launchURL(String url) async {
+    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
       await launch(url);
     } else {
       throw 'Could not launch $url';
@@ -207,7 +211,7 @@ class _HomePageState extends State<HomePage> {
         } else if (index == 2) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => WishlistScreen()), // Navigate to WishlistScreen
+            MaterialPageRoute(builder: (context) => const WishlistScreen()), 
           );
         }
       },

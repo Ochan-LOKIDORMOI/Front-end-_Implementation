@@ -1,15 +1,19 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PlaceDetailsPage extends StatelessWidget {
   final Map<String, dynamic> place;
 
-  const PlaceDetailsPage({required this.place, Key? key}) : super(key: key);
+  const PlaceDetailsPage({required this.place, super.key});
 
   void _launchURL(BuildContext context, String url) async {
+    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
       await launch(url);
     } else {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Could not launch $url')),
       );
@@ -37,7 +41,7 @@ class PlaceDetailsPage extends StatelessWidget {
               const SizedBox(height: 16.0),
               Text(
                 place['name'],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -45,14 +49,14 @@ class PlaceDetailsPage extends StatelessWidget {
               const SizedBox(height: 8.0),
               Text(
                 place['description'],
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16.0,
                 ),
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () => _launchURL(context, place['url']),
-                child: Text('Open in Browser'),
+                child: const Text('Open in Browser'),
               ),
             ],
           ),

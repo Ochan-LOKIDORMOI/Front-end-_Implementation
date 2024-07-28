@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WishlistScreen extends StatefulWidget {
+  const WishlistScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _WishlistScreenState createState() => _WishlistScreenState();
 }
 
@@ -36,10 +39,10 @@ class _WishlistScreenState extends State<WishlistScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Wishlist'),
+        title: const Text('Wishlist'),
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: places.length,
               itemBuilder: (context, index) {
@@ -68,7 +71,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
 class PlaceDetailScreen extends StatelessWidget {
   final DocumentSnapshot place;
 
-  PlaceDetailScreen({required this.place});
+  const PlaceDetailScreen({super.key, required this.place});
 
   @override
   Widget build(BuildContext context) {
@@ -84,20 +87,20 @@ class PlaceDetailScreen extends StatelessWidget {
             place['imageURL'] != null
                 ? Image.network(place['imageURL'])
                 : Container(),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               place['name'],
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               place['province'],
-              style: TextStyle(fontSize: 18, color: Colors.grey),
+              style: const TextStyle(fontSize: 18, color: Colors.grey),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               place['description'],
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),

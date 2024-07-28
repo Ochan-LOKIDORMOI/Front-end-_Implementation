@@ -72,7 +72,7 @@ Widget _buildBottomNavigationBar(BuildContext context) {
         if (index == 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => const HomePage()),
           );
         } else if (index == 1) {
           Navigator.push(

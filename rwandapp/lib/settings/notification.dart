@@ -7,6 +7,7 @@ class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
 
@@ -91,7 +92,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         if (index == 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => const HomePage()),
           );
         } else if (index == 1) {
           Navigator.push(
