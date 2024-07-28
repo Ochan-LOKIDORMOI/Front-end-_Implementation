@@ -1,4 +1,3 @@
-// TODO Implement this library.
 class VisitedPlaces {
   static final List<Map<String, dynamic>> _visitedPlaces = [];
 

@@ -46,7 +46,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                 final place = places[index];
                 return ListTile(
                   leading: place['imageURL'] != null
-                      ? Image.network(place['imageURL'], width: 50, height: 50)
+                      ? Image.network(place['imageURL'], width: 50, height: 50, fit: BoxFit.cover)
                       : null,
                   title: Text(place['name']),
                   subtitle: Text(place['province']),
@@ -76,7 +76,7 @@ class PlaceDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(place['name']),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'VisitedPlaces.dart';
+import 'package:rwandapp/Pages/PlaceDetailsPage.dart';
+import 'package:rwandapp/Pages/VisitedPlaces.dart';
 
 class ExperiencesPage extends StatelessWidget {
   const ExperiencesPage({super.key});
@@ -19,21 +19,59 @@ class ExperiencesPage extends StatelessWidget {
         itemCount: VisitedPlaces.visitedPlaces.length,
         itemBuilder: (context, index) {
           final place = VisitedPlaces.visitedPlaces[index];
-          return Card(
-            margin: const EdgeInsets.all(8.0),
-            child: ListTile(
-              leading: Image.network(
-                place['imagePath'],
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PlaceDetailsPage(place: place),
+                ),
+              );
+            },
+            child: Card(
+              margin: const EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.network(
+                    place['imagePath'],
+                    width: double.infinity,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      place['name'],
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      place['description'],
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
               ),
-              title: Text(place['name']),
-              subtitle: Text(place['description']),
             ),
           );
         },
       ),
     );
   }
+}
+
+void main() {
+  runApp(const MaterialApp(
+    home: ExperiencesPage(),
+  ));
 }
