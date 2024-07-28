@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:rwandapp/Pages/PlaceDetailsPage.dart';
 import 'package:rwandapp/Pages/VisitedPlaces.dart';
 
+void main() {
+  runApp(const MaterialApp(
+    home: ExperiencesPage(),
+  ));
+}
+
 class ExperiencesPage extends StatelessWidget {
   const ExperiencesPage({super.key});
 
@@ -68,10 +74,4 @@ class ExperiencesPage extends StatelessWidget {
       ),
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    home: ExperiencesPage(),
-  ));
 }
