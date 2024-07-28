@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
@@ -50,75 +51,91 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Recommended for you',
-                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                Container(
+                  color: Colors.blue.shade50,
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Recommended for you',
+                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
-                SizedBox(
-                  height: constraints.maxWidth > 600 ? 300.0 : 200.0,
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('places')
-                        .where('category', isEqualTo: 'Recommended')
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      final filteredDocs = snapshot.data!.docs.where((doc) =>
-                          doc['name'].toString().toLowerCase().contains(searchQuery.toLowerCase()));
-                      return GridView.count(
-                        crossAxisCount: 2,
-                        childAspectRatio: (constraints.maxWidth / 2) / (constraints.maxWidth / 2 + 100),
-                        children: filteredDocs.map((doc) {
-                          return _buildPlaceCard(
-                            doc['name'],
-                            doc['imagePath'],
-                            doc['url'],
-                            doc['description'],
-                            constraints.maxWidth,
-                            doc,
-                          );
-                        }).toList(),
-                      );
-                    },
+                Container(
+                  color: Colors.blue.shade50,
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: constraints.maxWidth > 600 ? 300.0 : 200.0,
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('places')
+                          .where('category', isEqualTo: 'Recommended')
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        final filteredDocs = snapshot.data!.docs.where((doc) =>
+                            doc['name'].toString().toLowerCase().contains(searchQuery.toLowerCase()));
+                        return GridView.count(
+                          crossAxisCount: 2,
+                          childAspectRatio: (constraints.maxWidth / 2) / (constraints.maxWidth / 2 + 100),
+                          children: filteredDocs.map((doc) {
+                            return _buildPlaceCard(
+                              doc['name'],
+                              doc['imagePath'],
+                              doc['url'],
+                              doc['description'],
+                              constraints.maxWidth,
+                              doc,
+                            );
+                          }).toList(),
+                        );
+                      },
+                    ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Categories',
-                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                Container(
+                  color: Colors.green.shade50,
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Categories',
+                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
-                SizedBox(
-                  height: constraints.maxWidth > 600 ? 300.0 : 200.0,
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance.collection('places').snapshots(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      final filteredDocs = snapshot.data!.docs.where((doc) =>
-                          doc['name'].toString().toLowerCase().contains(searchQuery.toLowerCase()));
-                      return GridView.count(
-                        crossAxisCount: 2,
-                        childAspectRatio: (constraints.maxWidth / 2) / (constraints.maxWidth / 2 + 100),
-                        children: filteredDocs.map((doc) {
-                          return _buildPlaceCard(
-                            doc['name'],
-                            doc['imagePath'],
-                            doc['url'],
-                            doc['description'],
-                            constraints.maxWidth,
-                            doc,
-                          );
-                        }).toList(),
-                      );
-                    },
+                Container(
+                  color: Colors.green.shade50,
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: constraints.maxWidth > 600 ? 300.0 : 200.0,
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance.collection('places').snapshots(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        final filteredDocs = snapshot.data!.docs.where((doc) =>
+                            doc['name'].toString().toLowerCase().contains(searchQuery.toLowerCase()));
+                        return GridView.count(
+                          crossAxisCount: 2,
+                          childAspectRatio: (constraints.maxWidth / 2) / (constraints.maxWidth / 2 + 100),
+                          children: filteredDocs.map((doc) {
+                            return _buildPlaceCard(
+                              doc['name'],
+                              doc['imagePath'],
+                              doc['url'],
+                              doc['description'],
+                              constraints.maxWidth,
+                              doc,
+                            );
+                          }).toList(),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -143,6 +160,19 @@ class _HomePageState extends State<HomePage> {
       },
       child: Container(
         margin: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -211,7 +241,7 @@ class _HomePageState extends State<HomePage> {
         } else if (index == 2) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const WishlistScreen()), 
+            MaterialPageRoute(builder: (context) => const WishlistScreen()),
           );
         }
       },
