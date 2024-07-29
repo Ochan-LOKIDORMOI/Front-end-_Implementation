@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rwandapp/Pages/home_page.dart';
-import 'package:rwandapp/Pages/location.dart';
+import 'package:rwandapp/Pages/ExperiencesPage.dart';
 import 'package:rwandapp/settings/setting.dart';
 
 
@@ -153,12 +153,12 @@ class ProfileScreen extends StatelessWidget {
         if (index == 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(builder: (context) => HomePage()),
           );
         } else if (index == 1) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const MapScreen()),
+            MaterialPageRoute(builder: (context) => const ExperiencesPage()),
           );
         }
       },
