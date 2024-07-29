@@ -7,10 +7,17 @@ import 'package:rwandapp/settings/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String name;
+  final String email;
+
+  const HomePage({
+    super.key,
+    required this.name,
+    required this.email,
+    String? profilePhotoUrl,
+  });
 
   @override
-  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
@@ -58,7 +65,8 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(16.0),
                     child: Text(
                       'Recommended for you',
-                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -74,13 +82,18 @@ class _HomePageState extends State<HomePage> {
                           .snapshots(),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
                         final filteredDocs = snapshot.data!.docs.where((doc) =>
-                            doc['name'].toString().toLowerCase().contains(searchQuery.toLowerCase()));
+                            doc['name']
+                                .toString()
+                                .toLowerCase()
+                                .contains(searchQuery.toLowerCase()));
                         return GridView.count(
                           crossAxisCount: 2,
-                          childAspectRatio: (constraints.maxWidth / 2) / (constraints.maxWidth / 2 + 100),
+                          childAspectRatio: (constraints.maxWidth / 2) /
+                              (constraints.maxWidth / 2 + 100),
                           children: filteredDocs.map((doc) {
                             return _buildPlaceCard(
                               doc['name'],
@@ -103,7 +116,8 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(16.0),
                     child: Text(
                       'Categories',
-                      style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 18.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -113,16 +127,23 @@ class _HomePageState extends State<HomePage> {
                   child: SizedBox(
                     height: constraints.maxWidth > 600 ? 300.0 : 200.0,
                     child: StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('places').snapshots(),
+                      stream: FirebaseFirestore.instance
+                          .collection('places')
+                          .snapshots(),
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
-                          return const Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
                         final filteredDocs = snapshot.data!.docs.where((doc) =>
-                            doc['name'].toString().toLowerCase().contains(searchQuery.toLowerCase()));
+                            doc['name']
+                                .toString()
+                                .toLowerCase()
+                                .contains(searchQuery.toLowerCase()));
                         return GridView.count(
                           crossAxisCount: 2,
-                          childAspectRatio: (constraints.maxWidth / 2) / (constraints.maxWidth / 2 + 100),
+                          childAspectRatio: (constraints.maxWidth / 2) /
+                              (constraints.maxWidth / 2 + 100),
                           children: filteredDocs.map((doc) {
                             return _buildPlaceCard(
                               doc['name'],
@@ -147,7 +168,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildPlaceCard(String name, String imagePath, String url, String description, double screenWidth, QueryDocumentSnapshot doc) {
+  Widget _buildPlaceCard(String name, String imagePath, String url,
+      String description, double screenWidth, QueryDocumentSnapshot doc) {
     return GestureDetector(
       onTap: () {
         VisitedPlaces.addPlace({
@@ -211,9 +233,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _launchURL(String url) async {
-    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
-      // ignore: deprecated_member_use
       await launch(url);
     } else {
       throw 'Could not launch $url';
@@ -231,7 +251,12 @@ class _HomePageState extends State<HomePage> {
         if (index == 3) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const ProfileScreen()),
+            MaterialPageRoute(
+              builder: (context) => ProfileScreen(
+                name: widget.name,
+                email: widget.email,
+              ),
+            ),
           );
         } else if (index == 1) {
           Navigator.push(

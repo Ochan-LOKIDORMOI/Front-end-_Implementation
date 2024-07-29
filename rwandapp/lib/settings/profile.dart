@@ -1,13 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:rwandapp/Pages/home_page.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 import 'package:rwandapp/Pages/ExperiencesPage.dart';
+import 'package:rwandapp/Pages/home_page.dart';
 import 'package:rwandapp/settings/setting.dart';
 
-
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   final Color cardColor = const Color.fromARGB(255, 79, 150, 145);
+  final String name;
+  final String email;
+  final String? profilePhotoUrl;
 
-  const ProfileScreen({super.key});
+  const ProfileScreen({
+    super.key,
+    required this.name,
+    required this.email,
+    this.profilePhotoUrl,
+  });
+
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String? _profilePhotoUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _profilePhotoUrl = widget.profilePhotoUrl;
+    print("Name: ${widget.name}");
+    print("Email: ${widget.email}");
+  }
+
+  Future<void> _pickImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _profilePhotoUrl = pickedFile.path;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,25 +74,32 @@ class ProfileScreen extends StatelessWidget {
   Widget _buildUserInfoCard() {
     return Container(
       padding: const EdgeInsets.all(16),
-      color: cardColor,
+      color: widget.cardColor,
       child: Row(
         children: [
-          CircleAvatar(
-            radius: 30,
-            backgroundColor: Colors.white,
-            child: Icon(Icons.person, size: 40, color: Colors.grey[400]),
+          GestureDetector(
+            onTap: _pickImage,
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: Colors.white,
+              backgroundImage: _profilePhotoUrl != null
+                  ? FileImage(File(_profilePhotoUrl!))
+                  : null,
+              child: _profilePhotoUrl == null
+                  ? Icon(Icons.person, size: 40, color: Colors.grey[400])
+                  : null,
+            ),
           ),
           const SizedBox(width: 16),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Name...',
-                  style: TextStyle(
+              Text(widget.name,
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.bold)),
-              Text("Other users' info...",
-                  style: TextStyle(color: Colors.black)),
+              Text(widget.email, style: const TextStyle(color: Colors.black)),
             ],
           ),
         ],
@@ -70,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: cardColor,
+        color: widget.cardColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -104,7 +146,7 @@ class ProfileScreen extends StatelessWidget {
   Widget _buildOptionsList(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: cardColor,
+        color: widget.cardColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -147,13 +189,18 @@ class ProfileScreen extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.black,
       selectedItemColor: Colors.white,
-      unselectedItemColor: cardColor,
+      unselectedItemColor: widget.cardColor,
       currentIndex: 3,
       onTap: (index) {
         if (index == 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(
+                builder: (context) => HomePage(
+                      name: widget.name,
+                      email: widget.email,
+                      profilePhotoUrl: _profilePhotoUrl,
+                    )),
           );
         } else if (index == 1) {
           Navigator.push(
