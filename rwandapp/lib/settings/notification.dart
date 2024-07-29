@@ -92,7 +92,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         if (index == 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage(name: '', email: '')),
+            MaterialPageRoute(builder: (context) => const HomePage()),
           );
         } else if (index == 1) {
           Navigator.push(

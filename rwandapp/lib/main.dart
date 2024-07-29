@@ -1,13 +1,16 @@
+// main.dart
 import 'package:flutter/material.dart';
 import 'package:rwandapp/Pages/home_page.dart';
 import 'package:rwandapp/Pages/login.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:rwandapp/Pages/signup.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:rwandapp/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
   runApp(const MyApp());
 }
 
@@ -115,11 +118,7 @@ class DiscoverRwandaScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const HomePage(
-                            name: '',
-                            email: '',
-                          )),
+                  MaterialPageRoute(builder: (context) => const HomePage()),
                 );
               },
               style: ElevatedButton.styleFrom(

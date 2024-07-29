@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'home_page.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SignupScreenState createState() => _SignupScreenState();
 }
 
@@ -29,24 +29,15 @@ class _SignupScreenState extends State<SignupScreen> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-
-      // Update the display name
-      await userCredential.user!.updateDisplayName(_nameController.text);
-
+      // Handle successful registration
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Successfully signed up')),
       );
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(
-            name: _nameController.text,
-            email: _emailController.text,
-          ),
-        ),
-      );
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
     } catch (e) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter the correct details')),
       );
@@ -104,6 +95,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       decoration: const InputDecoration(
                         labelText: 'Password',
                         prefixIcon: Icon(Icons.lock),
+                        suffixIcon: Icon(Icons.visibility),
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -112,42 +104,58 @@ class _SignupScreenState extends State<SignupScreen> {
                       controller: _confirmPasswordController,
                       obscureText: true,
                       decoration: const InputDecoration(
-                        labelText: 'Confirm Password',
+                        labelText: 'Re-enter Password',
                         prefixIcon: Icon(Icons.lock),
+                        suffixIcon: Icon(Icons.visibility),
                         border: OutlineInputBorder(),
                       ),
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: _signUp,
-                      child: const Text('Sign Up'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 100, vertical: 15),
+                      ),
+                      child: const Text('Sign up'),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
-                      'Or sign up with',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    const Text('Or sign up with'),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          icon: const Icon(FontAwesomeIcons.google),
+                          icon: const FaIcon(FontAwesomeIcons.google),
                           onPressed: () {},
+                          iconSize: 30,
                         ),
-                        const SizedBox(width: 20),
+                        const SizedBox(width: 40),
                         IconButton(
-                          icon: const Icon(FontAwesomeIcons.facebook),
+                          icon: const FaIcon(FontAwesomeIcons.facebook),
                           onPressed: () {},
+                          iconSize: 30,
                         ),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    TextButton(
+                    ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      child: const Text('Already have an account? Sign in'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.grey[200],
+                        foregroundColor: Colors.black,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 80, vertical: 20),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                      child: const Text(
+                        'Back',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ],
                 ),
