@@ -69,7 +69,7 @@ class SettingsScreen extends StatelessWidget {
         if (index == 0) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => HomePage(name: '', email: '')),
           );
         } else if (index == 1) {
           Navigator.push(

@@ -7,10 +7,16 @@ import 'package:rwandapp/settings/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String name;
+  final String email;
+
+  const HomePage({
+    super.key,
+    required this.name,
+    required this.email, String? profilePhotoUrl,
+  });
 
   @override
-  // ignore: library_private_types_in_public_api
   _HomePageState createState() => _HomePageState();
 }
 
@@ -211,9 +217,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _launchURL(String url) async {
-    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
-      // ignore: deprecated_member_use
       await launch(url);
     } else {
       throw 'Could not launch $url';
@@ -231,7 +235,12 @@ class _HomePageState extends State<HomePage> {
         if (index == 3) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const ProfileScreen()),
+            MaterialPageRoute(
+              builder: (context) => ProfileScreen(
+                name: widget.name,
+                email: widget.email,
+              ),
+            ),
           );
         } else if (index == 1) {
           Navigator.push(

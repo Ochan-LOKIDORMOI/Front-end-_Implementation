@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:rwandapp/Pages/home_page.dart';
+import 'home_page.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _LoginScreenState createState() => _LoginScreenState();
 }
 
@@ -22,16 +20,26 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      // Handle successful login
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Successfully logged in')),
+      );
+
+      final user = userCredential.user;
+      final userName = user!.displayName ?? 'User';
+
       Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(
+          builder: (context) => HomePage(
+            name: userName,
+            email: _emailController.text,
+          ),
+        ),
       );
     } catch (e) {
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter the correct email and password !!!')),
+        const SnackBar(content: Text('Login failed')),
       );
     }
   }
@@ -59,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     const SizedBox(height: 20),
                     const Text(
-                      'Welcome back!',
+                      'Log in to your account',
                       style: TextStyle(fontSize: 24),
                     ),
                     const SizedBox(height: 20),
@@ -78,72 +86,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: const InputDecoration(
                         labelText: 'Password',
                         prefixIcon: Icon(Icons.lock),
-                        suffixIcon: Icon(Icons.visibility),
                         border: OutlineInputBorder(),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Checkbox(value: true, onChanged: (bool? value) {}),
-                            const Text('Remember Password'),
-                          ],
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text('Forget Password?'),
-                        ),
-                      ],
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: _login,
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 100, vertical: 15),
-                      ),
-                      child: const Text('Log in'),
+                      child: const Text('Log In'),
                     ),
                     const SizedBox(height: 20),
-                    const Text('Or log in with'),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.google),
-                          onPressed: () {},
-                          iconSize: 30,
-                        ),
-                        const SizedBox(width: 40),
-                        IconButton(
-                          icon: const FaIcon(FontAwesomeIcons.facebook),
-                          onPressed: () {},
-                          iconSize: 30,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
+                    TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[200],
-                        foregroundColor: Colors.black,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 80, vertical: 20),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                      child: const Text(
-                        'Back',
-                        style: TextStyle(fontSize: 16),
-                      ),
+                      child: const Text('Don\'t have an account? Sign up'),
                     ),
                   ],
                 ),
