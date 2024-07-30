@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:rwandapp/Pages/ExperiencesPage.dart';
 import 'package:rwandapp/Pages/home_page.dart';
 import 'package:rwandapp/settings/setting.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rwandapp/main.dart'; // Assuming DiscoverRwandaScreen is in main.dart
 
 class ProfileScreen extends StatefulWidget {
   final Color cardColor = const Color.fromARGB(255, 79, 150, 145);
@@ -24,13 +26,12 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   String? _profilePhotoUrl;
+  final TextEditingController _bioController = TextEditingController(text: "User bio...");
 
   @override
   void initState() {
     super.initState();
     _profilePhotoUrl = widget.profilePhotoUrl;
-    print("Name: ${widget.name}");
-    print("Email: ${widget.email}");
   }
 
   Future<void> _pickImage() async {
@@ -44,6 +45,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  Future<void> _logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const DiscoverRwandaScreen()),
+      (Route<dynamic> route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,16 +61,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           children: [
             _buildUserInfoCard(),
-            const SizedBox(height: 54),
+            const SizedBox(height: 16),
             Expanded(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  children: [
-                    _buildBioSection(),
-                    const SizedBox(height: 54),
-                    _buildOptionsList(context),
-                  ],
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    children: [
+                      _buildBioSection(),
+                      const SizedBox(height: 32),
+                      _buildOptionsList(context),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -79,15 +91,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           GestureDetector(
             onTap: _pickImage,
-            child: CircleAvatar(
-              radius: 30,
-              backgroundColor: Colors.white,
-              backgroundImage: _profilePhotoUrl != null
-                  ? FileImage(File(_profilePhotoUrl!))
-                  : null,
-              child: _profilePhotoUrl == null
-                  ? Icon(Icons.person, size: 40, color: Colors.grey[400])
-                  : null,
+            child: Stack(
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.white,
+                  backgroundImage: _profilePhotoUrl != null
+                      ? FileImage(File(_profilePhotoUrl!))
+                      : null,
+                  child: _profilePhotoUrl == null
+                      ? Icon(Icons.person, size: 40, color: Colors.grey[400])
+                      : null,
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.edit,
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(width: 16),
@@ -101,6 +132,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       fontWeight: FontWeight.bold)),
               Text(widget.email, style: const TextStyle(color: Colors.black)),
             ],
+          ),
+          const Spacer(),
+          TextButton(
+            onPressed: () => _logout(context),
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(9.0),
+              ),
+            ),
+            child: const Text('Logout'),
           ),
         ],
       ),
@@ -125,18 +168,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   color: Colors.black87)),
           const SizedBox(height: 8),
           Container(
-            width: double.infinity,
-            alignment: Alignment.center,
             color: Colors.white,
-            padding: const EdgeInsets.all(16),
-            constraints: const BoxConstraints(minHeight: 50),
-            child: const Text(
-              'User bio......',
-              style: TextStyle(
-                  color: Colors.black,
-                  height: 1.5,
-                  fontWeight: FontWeight.bold),
+            child: TextFormField(
+              controller: _bioController,
+              maxLines: null,
+              decoration: const InputDecoration(
+                hintText: '',
+                contentPadding: EdgeInsets.all(16),
+                border: InputBorder.none,
+              ),
+              style: const TextStyle(
+                color: Colors.black,
+                height: 1.5,
+                fontWeight: FontWeight.bold,
+              ),
             ),
+          ),
+          const SizedBox(height: 8),
+          ElevatedButton(
+            onPressed: () {
+              // Save the bio and handle further actions if needed
+              print("Updated Bio: ${_bioController.text}");
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Save Bio'),
           ),
         ],
       ),
