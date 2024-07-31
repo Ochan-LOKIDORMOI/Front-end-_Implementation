@@ -49,7 +49,12 @@ class _WishlistScreenState extends State<WishlistScreen> {
                 final place = places[index];
                 return ListTile(
                   leading: place['imageURL'] != null
-                      ? Image.network(place['imageURL'], width: 50, height: 50, fit: BoxFit.cover)
+                      ? Image.network(
+                          place['imageURL'],
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        )
                       : null,
                   title: Text(place['name']),
                   subtitle: Text(place['province']),
@@ -90,12 +95,18 @@ class PlaceDetailScreen extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               place['name'],
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 10),
             Text(
               place['province'],
-              style: const TextStyle(fontSize: 18, color: Colors.grey),
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.grey,
+              ),
             ),
             const SizedBox(height: 20),
             Text(

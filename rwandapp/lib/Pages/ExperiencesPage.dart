@@ -19,7 +19,7 @@ class ExperiencesPage extends StatelessWidget {
           'Your Experiences',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: const Color.fromARGB(255, 13, 17, 13),
+        backgroundColor: Color.fromARGB(255, 45, 116, 248),
       ),
       body: ListView.builder(
         itemCount: VisitedPlaces.visitedPlaces.length,

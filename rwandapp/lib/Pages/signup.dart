@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'home_page.dart';
+import 'package:rwandapp/Pages/login.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -40,15 +40,12 @@ class _SignupScreenState extends State<SignupScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(
-            name: _nameController.text,
-            email: _emailController.text,
-          ),
+          builder: (context) => const LoginScreen(),
         ),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter the correct details')),
+        const SnackBar(content: Text('Signup failed. Please try again.')),
       );
     }
   }
