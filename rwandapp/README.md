@@ -1,5 +1,8 @@
 # Front-End implementation of Discover Rwanda App
 
+# APK FILE FOR DiscoverRwanda
+https://drive.google.com/file/d/1PGGhEyhRvIFaxRvuV4CVXnvs7Ex_qOzz/view?usp=sharing
+
 A new Flutter project.
 # HERE IS THE LINK TO THE VIDEO
 
